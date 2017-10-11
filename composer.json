@@ -1,0 +1,64 @@
+{
+  "name": "contributte/neonizer",
+  "description": "Neonizer",
+  "keywords": [
+    "nette"
+  ],
+  "type": "library",
+  "license": [
+    "MIT"
+  ],
+  "homepage": "https://github.com/contributte/migrations",
+  "authors": [
+    {
+      "name": "Milan Felix Sulc",
+      "homepage": "https://f3l1x.io"
+    }
+  ],
+  "require": {
+    "php": ">=5.6",
+    "nette/neon": "^2.4"
+  },
+  "require-dev": {
+    "ninjify/qa": "~0.4.0",
+    "ninjify/nunjuck": "~0.1.4",
+    "composer/composer": "^1.5",
+    "symfony/yaml": "^3.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Contributte\\Neonizer\\": "src/"
+    }
+  },
+  "scripts": {
+    "qa": [
+      "linter src tests",
+      "codesniffer src tests"
+    ],
+    "tester": [
+      "tester -s -p php --colors 1 -c tests/php-unix.ini tests/cases"
+    ],
+    "tester-coverage": [
+      "tester -s -p php --colors 1 -c tests/php-unix.ini -d extension=xdebug.so --coverage ./coverage.xml --coverage-src ./src tests/cases"
+    ],
+    "post-install-cmd": [
+      "Contributte\\Neonizer\\NeonizerExtension::process"
+    ],
+    "post-update-cmd": [
+      "Contributte\\Neonizer\\NeonizerExtension::process"
+    ]
+  },
+  "extra": {
+    "neonizer": {
+      "files": [
+        {
+          "dist-file": "files/config.neon.dist"
+        },
+        {
+          "dist-file": "files/config.neon.dist",
+          "file": "files/config.json"
+        }
+      ]
+    }
+  }
+}

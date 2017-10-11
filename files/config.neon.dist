@@ -1,0 +1,9 @@
+user: root
+password: ""
+database:
+    name: dbname
+    section:
+        a: "Section A"
+        b: "Section B"
+        c:
+        d:
