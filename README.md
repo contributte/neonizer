@@ -1,6 +1,6 @@
 # Neonizer
 
-Interactive NEON, JSON parameters during composer install / update
+Interactive parameters (NEON/JSON) handling during composer install / update.
 
 -----
 
@@ -33,35 +33,40 @@ composer require contributte/neonizer
 Add post-install and post-update script to composer.json
 
 ```json
-  "scripts": {
-    "post-install-cmd": [
-      "Contributte\\Neonizer\\NeonizerExtension::process"
-    ],
-    "post-update-cmd": [
-      "Contributte\\Neonizer\\NeonizerExtension::process"
-    ]
-  }
+"scripts": {
+  "post-install-cmd": [
+    "Contributte\\Neonizer\\NeonizerExtension::process"
+  ],
+  "post-update-cmd": [
+    "Contributte\\Neonizer\\NeonizerExtension::process"
+  ]
+}
 ```
 
 ## Usage
 
-Add extra.neonizer section to your composer.json 
+Add `extra.neonizer` section to your composer.json 
 
 ```json
-   "extra": {
-      "neonizer": {
-        "files": [
-          {
-            "dist-file": "app/config/config.local.neon.dist"
-          },
-          {
-            "dist-file": "app/config/config.local.neon.dist",
-            "file": "app/config/config.local.json"
-          }
-        ]
+"extra": {
+  "neonizer": {
+    "files": [
+      {
+        "dist-file": "app/config/config.local.neon.dist"
+      },
+      {
+        "dist-file": "app/config/config.local.neon.dist",
+        "file": "app/config/config.local.json"
       }
-    }
+    ]
+  }
+}
 ```
+
+You can define:
+
+- `dist-file` - Resource/template file for parameters handling.
+- `file` - Destination/result file.
 
 ## Maintainers
 
