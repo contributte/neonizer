@@ -1,5 +1,7 @@
 <?php
 
+namespace Contributte\Neonizer\Tests;
+
 /**
  * Test: FileProcessor
  */
@@ -9,6 +11,7 @@ use Contributte\Neonizer\Config\FileConfig;
 use Contributte\Neonizer\Decoder\DecoderFactory;
 use Contributte\Neonizer\Encoder\EncoderFactory;
 use Contributte\Neonizer\FileProcessor;
+use Mockery;
 use Tester\Assert;
 use Tester\TestCase;
 
