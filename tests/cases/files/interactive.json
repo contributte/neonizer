@@ -1,0 +1,8 @@
+{
+    "mode": "bar",
+    "database": {
+        "user": "bar",
+        "pass": "bar",
+        "dbname": "bar"
+    }
+}

@@ -126,7 +126,7 @@ class FileProcessor
 	{
 		$encoder = $this->encoderFactory->create($config->getOutputType());
 		$content = $encoder->encode($content);
-		$this->saveFile($content, $config->getFile());
+		$this->saveFile((string) $content, $config->getFile());
 	}
 
 	/**

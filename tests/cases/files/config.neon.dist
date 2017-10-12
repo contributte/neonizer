@@ -1,0 +1,5 @@
+mode: debug
+database:
+    user: root
+    pass:
+    dbname: neonizer
