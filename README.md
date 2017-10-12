@@ -52,11 +52,11 @@ Add extra.neonizer section to your composer.json
       "neonizer": {
         "files": [
           {
-            "dist-file": "files/config.neon.dist"
+            "dist-file": "app/config/config.local.neon.dist"
           },
           {
-            "dist-file": "files/config.neon.dist",
-            "file": "files/config.json"
+            "dist-file": "app/config/config.local.neon.dist",
+            "file": "app/config/config.local.json"
           }
         ]
       }
