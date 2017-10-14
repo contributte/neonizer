@@ -62,13 +62,13 @@ class FileProcessor
 	/**
 	 * @param mixed[] $expected
 	 * @param mixed[] $actual
-	 * @param string|NULL $section
+	 * @param string|NULL $parentSection
 	 * @return mixed[] mixed
 	 */
-	protected function processParams(array $expected, array $actual, $section = NULL)
+	protected function processParams(array $expected, array $actual, $parentSection = NULL)
 	{
 		foreach ($expected as $key => $param) {
-			$section = $section ? $section . '.' . $key : $key;
+			$section = $parentSection ? $parentSection . '.' . $key : $key;
 			if (is_array($param)) {
 				$actualSection = isset($actual[$key]) ? $actual[$key] : [];
 				$actual[$key] = $this->processParams($param, $actualSection, $section);
