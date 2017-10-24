@@ -4,7 +4,7 @@
   "keywords": ["nette", "composer"],
   "type": "library",
   "license": ["MIT"],
-  "homepage": "https://github.com/contributte/migrations",
+  "homepage": "https://github.com/contributte/neonizer",
   "authors": [
     {
       "name": "Milan Felix Sulc",
