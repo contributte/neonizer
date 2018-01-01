@@ -72,6 +72,22 @@ You can define:
 - `dist-file` - Resource/template file for parameters handling.
 - `file` - Destination/result file.
 
+### Validation
+
+Neonizer is also able to validate the configuration non-interactively. Add the following script to composer.json
+
+```json
+"scripts": {
+  "validate-config": [
+    "Contributte\\Neonizer\\NeonizerExtension::validate"
+  ]
+}
+```
+
+Then run `composer run validate-config`. The script will exit with a non-zero code if the destination file forgets
+to set any parameters required by dist-file. This can be run e.g. on production as a part of the deploy process to
+abort the deploy if the configuration is not up-to-date.
+
 ## Maintainers
 
 <table>

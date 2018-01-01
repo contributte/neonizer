@@ -4,7 +4,6 @@ namespace Contributte\Neonizer;
 
 use Composer\IO\IOInterface;
 use Contributte\Neonizer\Config\FileConfig;
-use Contributte\Neonizer\Decoder\IDecoderFactory;
 use Contributte\Neonizer\Encoder\IEncoderFactory;
 
 class FileProcessor
@@ -16,23 +15,23 @@ class FileProcessor
 	/** @var IEncoderFactory */
 	private $encoderFactory;
 
-	/** @var IDecoderFactory */
-	private $decoderFactory;
+	/** @var FileLoader */
+	private $fileLoader;
 
 	/**
 	 * @param IOInterface $io
 	 * @param IEncoderFactory $encoderFactory
-	 * @param IDecoderFactory $decoderFactory
+	 * @param FileLoader $fileLoader
 	 */
 	public function __construct(
 		IOInterface $io,
 		IEncoderFactory $encoderFactory,
-		IDecoderFactory $decoderFactory
+		FileLoader $fileLoader
 	)
 	{
 		$this->io = $io;
 		$this->encoderFactory = $encoderFactory;
-		$this->decoderFactory = $decoderFactory;
+		$this->fileLoader = $fileLoader;
 	}
 
 	/**
@@ -47,11 +46,11 @@ class FileProcessor
 			$config->getFile()
 		));
 
-		$expected = $this->loadDistFile($config);
+		$expected = $this->fileLoader->loadDistFile($config);
 		$actual = [];
 
 		if ($config->isFileExist()) {
-			$existingValues = $this->loadFile($config);
+			$existingValues = $this->fileLoader->loadFile($config);
 			$actual = array_merge($actual, $existingValues);
 		}
 
@@ -97,26 +96,6 @@ class FileProcessor
 			sprintf('<question>%s</question> (<comment>%s</comment>): ', $param, $default),
 			$default
 		);
-	}
-
-	/**
-	 * @param FileConfig $config
-	 * @return mixed[]
-	 */
-	protected function loadFile(FileConfig $config): array
-	{
-		$decoder = $this->decoderFactory->create($config->getOutputType());
-		return $decoder->decode(file_get_contents($config->getFile()));
-	}
-
-	/**
-	 * @param FileConfig $config
-	 * @return mixed[]
-	 */
-	protected function loadDistFile(FileConfig $config): array
-	{
-		$decoder = $this->decoderFactory->create($config->getSourceType());
-		return $decoder->decode(file_get_contents($config->getDistFile()));
 	}
 
 	/**
