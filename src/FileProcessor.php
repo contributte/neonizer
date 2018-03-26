@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Neonizer;
 
@@ -39,7 +39,7 @@ class FileProcessor
 	 * @param FileConfig $config
 	 * @return void
 	 */
-	public function process(FileConfig $config)
+	public function process(FileConfig $config): void
 	{
 		$this->io->write(sprintf(
 			'<info>%s the "%s" file</info>',
@@ -63,9 +63,9 @@ class FileProcessor
 	 * @param mixed[] $expected
 	 * @param mixed[] $actual
 	 * @param string|NULL $parentSection
-	 * @return mixed[] mixed
+	 * @return mixed[]
 	 */
-	protected function processParams(array $expected, array $actual, $parentSection = NULL)
+	protected function processParams(array $expected, array $actual, ?string $parentSection = NULL): array
 	{
 		foreach ($expected as $key => $param) {
 			$section = $parentSection ? $parentSection . '.' . $key : $key;
@@ -85,10 +85,10 @@ class FileProcessor
 
 	/**
 	 * @param string $param
-	 * @param string $default
-	 * @return string
+	 * @param string|NULL $default
+	 * @return string|NULL
 	 */
-	protected function getParam($param, $default)
+	protected function getParam(string $param, ?string $default): ?string
 	{
 		if (!$this->io->isInteractive()) {
 			return $default;
@@ -103,7 +103,7 @@ class FileProcessor
 	 * @param FileConfig $config
 	 * @return mixed[]
 	 */
-	protected function loadFile(FileConfig $config)
+	protected function loadFile(FileConfig $config): array
 	{
 		$decoder = $this->decoderFactory->create($config->getOutputType());
 		return $decoder->decode(file_get_contents($config->getFile()));
@@ -113,7 +113,7 @@ class FileProcessor
 	 * @param FileConfig $config
 	 * @return mixed[]
 	 */
-	protected function loadDistFile(FileConfig $config)
+	protected function loadDistFile(FileConfig $config): array
 	{
 		$decoder = $this->decoderFactory->create($config->getSourceType());
 		return $decoder->decode(file_get_contents($config->getDistFile()));
@@ -124,7 +124,7 @@ class FileProcessor
 	 * @param FileConfig $config
 	 * @return void
 	 */
-	protected function processFile(array $content, FileConfig $config)
+	protected function processFile(array $content, FileConfig $config): void
 	{
 		$encoder = $this->encoderFactory->create($config->getOutputType());
 		$content = $encoder->encode($content);
@@ -136,7 +136,7 @@ class FileProcessor
 	 * @param string $filename
 	 * @return void
 	 */
-	protected function saveFile($content, $filename)
+	protected function saveFile(string $content, string $filename): void
 	{
 		$dir = dirname($filename);
 		if (!is_dir($dir)) {

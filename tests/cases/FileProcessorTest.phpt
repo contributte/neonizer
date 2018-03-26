@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Neonizer\Tests;
 
@@ -17,16 +17,13 @@ use Tester\TestCase;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-/**
- * @testCase
- */
 class FileProcessorTest extends TestCase
 {
 
 	/**
 	 * @return void
 	 */
-	public function testNoInteractive()
+	public function testNoInteractive(): void
 	{
 		$generatedFile = __DIR__ . '/../tmp/files/no-interactive.neon';
 		$config = new FileConfig([
@@ -51,7 +48,7 @@ class FileProcessorTest extends TestCase
 	/**
 	 * @return void
 	 */
-	public function testInteractive()
+	public function testInteractive(): void
 	{
 		/** @var IOInterface $io */
 		$io = Mockery::mock(IOInterface::class)
@@ -85,7 +82,7 @@ class FileProcessorTest extends TestCase
 	 * @param string $actual
 	 * @return void
 	 */
-	private static function assertFiles($expected, $actual)
+	private static function assertFiles(string $expected, string $actual): void
 	{
 		Assert::same(file_get_contents($expected), file_get_contents($actual));
 	}

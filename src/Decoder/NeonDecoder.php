@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Neonizer\Decoder;
 
@@ -11,7 +11,7 @@ class NeonDecoder implements IDecoder
 	 * @param string $value
 	 * @return mixed[]
 	 */
-	public function decode($value)
+	public function decode(string $value): array
 	{
 		return Neon::decode($value);
 	}

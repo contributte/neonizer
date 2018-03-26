@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Neonizer\Config;
 
@@ -26,36 +26,42 @@ class FileConfig
 	public function __construct(array $config)
 	{
 		// Dist file
-		if (empty($config['dist-file']))
+		if (empty($config['dist-file'])) {
 			throw new InvalidArgumentException(
 				'The dist-file name is required'
 			);
+		}
 		$this->distFile = $config['dist-file'];
-		if (!is_file($this->distFile))
+		if (!is_file($this->distFile)) {
 			throw new InvalidArgumentException(
 				sprintf(
 					'The dist file "%s" does not exist. Check your dist-file config or create it.',
 					$this->distFile
 				)
 			);
+		}
 
 		// File
-		if (!empty($config['file']))
+		if (!empty($config['file'])) {
 			$this->file = $config['file'];
-		if (!$this->file)
+		}
+		if (!$this->file) {
 			$this->file = Utils::removeDistExtensions($this->distFile);
+		}
 
 		// Source & output type
-		if (!$this->sourceType)
+		if (!$this->sourceType) {
 			$this->sourceType = Utils::detectFileType($this->distFile);
-		if (!$this->outputType)
+		}
+		if (!$this->outputType) {
 			$this->outputType = Utils::detectFileType($this->file);
+		}
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getFile()
+	public function getFile(): string
 	{
 		return $this->file;
 	}
@@ -63,7 +69,7 @@ class FileConfig
 	/**
 	 * @return string
 	 */
-	public function getDistFile()
+	public function getDistFile(): string
 	{
 		return $this->distFile;
 	}
@@ -71,7 +77,7 @@ class FileConfig
 	/**
 	 * @return string|NULL
 	 */
-	public function getSourceType()
+	public function getSourceType(): ?string
 	{
 		return $this->sourceType;
 	}
@@ -79,7 +85,7 @@ class FileConfig
 	/**
 	 * @return string|NULL
 	 */
-	public function getOutputType()
+	public function getOutputType(): ?string
 	{
 		return $this->outputType;
 	}
@@ -87,7 +93,7 @@ class FileConfig
 	/**
 	 * @return bool
 	 */
-	public function isFileExist()
+	public function isFileExist(): bool
 	{
 		return is_file($this->file);
 	}

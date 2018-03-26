@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Neonizer;
 
@@ -15,7 +15,7 @@ class NeonizerExtension
 	 * @param Event $event
 	 * @return void
 	 */
-	public static function process(Event $event)
+	public static function process(Event $event): void
 	{
 		$extras = $event->getComposer()->getPackage()->getExtra();
 		if (!isset($extras['neonizer'])) {

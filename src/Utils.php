@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Neonizer;
 
@@ -12,7 +12,7 @@ class Utils
 	 * @param string $fileName
 	 * @return string|NULL
 	 */
-	public static function detectFileType($fileName)
+	public static function detectFileType(string $fileName): ?string
 	{
 		$fileName = self::removeDistExtensions($fileName);
 		$parts = explode('.', $fileName);
@@ -26,7 +26,7 @@ class Utils
 	 * @param string $fileName
 	 * @return string
 	 */
-	public static function removeDistExtensions($fileName)
+	public static function removeDistExtensions(string $fileName): string
 	{
 		foreach (self::$extensions as $ext) {
 			if (self::endsWith($fileName, $ext)) {
@@ -45,7 +45,7 @@ class Utils
 	 * @param string $needle
 	 * @return bool
 	 */
-	public static function endsWith($haystack, $needle)
+	public static function endsWith(string $haystack, string $needle): bool
 	{
 		return strlen($needle) === 0 || substr($haystack, -strlen($needle)) === $needle;
 	}

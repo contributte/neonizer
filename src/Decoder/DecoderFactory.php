@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Neonizer\Decoder;
 
@@ -20,14 +20,14 @@ class DecoderFactory implements IDecoderFactory
 	 * @param string|NULL $type
 	 * @return IDecoder
 	 */
-	public function create($type)
+	public function create(?string $type): IDecoder
 	{
 		if (isset($this->decoders[$type])) {
 			return $this->decoders[$type];
 		}
 
 		if (isset($this->decodersMap[$type])) {
-			$this->decoders[$type] = new $this->decodersMap[$type];
+			$this->decoders[$type] = new $this->decodersMap[$type]();
 			return $this->create($type);
 		}
 
