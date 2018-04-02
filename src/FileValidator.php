@@ -32,7 +32,7 @@ class FileValidator
 	 * @param FileConfig $config
 	 * @return string[]
 	 */
-	public function validate(FileConfig $config)
+	public function validate(FileConfig $config): array
 	{
 		$this->io->write(sprintf(
 			'<info>Validating the "%s" file</info>',
@@ -54,7 +54,7 @@ class FileValidator
 	 * @param FileConfig $config
 	 * @return mixed[]
 	 */
-	protected function loadFile(FileConfig $config)
+	protected function loadFile(FileConfig $config): array
 	{
 		$decoder = $this->decoderFactory->create($config->getOutputType());
 		return $decoder->decode(file_get_contents($config->getFile()));
@@ -64,7 +64,7 @@ class FileValidator
 	 * @param FileConfig $config
 	 * @return mixed[]
 	 */
-	protected function loadDistFile(FileConfig $config)
+	protected function loadDistFile(FileConfig $config): array
 	{
 		$decoder = $this->decoderFactory->create($config->getSourceType());
 		return $decoder->decode(file_get_contents($config->getDistFile()));
@@ -76,7 +76,7 @@ class FileValidator
 	 * @param string|NULL $parentSection
 	 * @return string[]
 	 */
-	protected function validateParams(array $expected, array $actual, $parentSection = NULL)
+	protected function validateParams(array $expected, array $actual, $parentSection = NULL): array
 	{
 		$missingKeys = [];
 

@@ -103,7 +103,7 @@ class FileProcessor
 	 * @param FileConfig $config
 	 * @return mixed[]
 	 */
-	protected function loadFile(FileConfig $config)
+	protected function loadFile(FileConfig $config): array
 	{
 		$decoder = $this->decoderFactory->create($config->getOutputType());
 		return $decoder->decode(file_get_contents($config->getFile()));
@@ -113,7 +113,7 @@ class FileProcessor
 	 * @param FileConfig $config
 	 * @return mixed[]
 	 */
-	protected function loadDistFile(FileConfig $config)
+	protected function loadDistFile(FileConfig $config): array
 	{
 		$decoder = $this->decoderFactory->create($config->getSourceType());
 		return $decoder->decode(file_get_contents($config->getDistFile()));
