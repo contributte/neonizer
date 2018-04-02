@@ -4,6 +4,7 @@ namespace Contributte\Neonizer;
 
 use Composer\IO\IOInterface;
 use Contributte\Neonizer\Config\FileConfig;
+use Contributte\Neonizer\Decoder\IDecoderFactory;
 
 class FileValidator
 {
@@ -11,20 +12,20 @@ class FileValidator
 	/** @var IOInterface */
 	private $io;
 
-	/** @var FileLoader */
-	private $fileLoader;
+	/** @var IDecoderFactory */
+	private $decoderFactory;
 
 	/**
 	 * @param IOInterface $io
-	 * @param FileLoader $fileLoader
+	 * @param IDecoderFactory $decoderFactory
 	 */
 	public function __construct(
 		IOInterface $io,
-		FileLoader $fileLoader
+		IDecoderFactory $decoderFactory
 	)
 	{
 		$this->io = $io;
-		$this->fileLoader = $fileLoader;
+		$this->decoderFactory = $decoderFactory;
 	}
 
 	/**
@@ -38,15 +39,35 @@ class FileValidator
 			$config->getFile()
 		));
 
-		$expected = $this->fileLoader->loadDistFile($config);
+		$expected = $this->loadDistFile($config);
 		$actual = [];
 
 		if ($config->isFileExist()) {
-			$existingValues = $this->fileLoader->loadFile($config);
+			$existingValues = $this->loadFile($config);
 			$actual = array_merge($actual, $existingValues);
 		}
 
 		return $this->validateParams($expected, $actual);
+	}
+
+	/**
+	 * @param FileConfig $config
+	 * @return mixed[]
+	 */
+	protected function loadFile(FileConfig $config)
+	{
+		$decoder = $this->decoderFactory->create($config->getOutputType());
+		return $decoder->decode(file_get_contents($config->getFile()));
+	}
+
+	/**
+	 * @param FileConfig $config
+	 * @return mixed[]
+	 */
+	protected function loadDistFile(FileConfig $config)
+	{
+		$decoder = $this->decoderFactory->create($config->getSourceType());
+		return $decoder->decode(file_get_contents($config->getDistFile()));
 	}
 
 	/**

@@ -11,7 +11,6 @@ namespace Contributte\Neonizer\Tests;
 use Composer\IO\IOInterface;
 use Contributte\Neonizer\Config\FileConfig;
 use Contributte\Neonizer\Decoder\DecoderFactory;
-use Contributte\Neonizer\FileLoader;
 use Contributte\Neonizer\FileValidator;
 use Mockery;
 use Tester\Assert;
@@ -40,7 +39,7 @@ class FileValidatorTest extends TestCase
 			->shouldReceive('write')
 			->getMock();
 
-		$validator = new FileValidator($io, new FileLoader(new DecoderFactory()));
+		$validator = new FileValidator($io, new DecoderFactory());
 		$missingKeys = $validator->validate($config);
 
 		Assert::same(['mode', 'database.user', 'database.pass'], $missingKeys);

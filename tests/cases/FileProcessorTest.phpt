@@ -12,7 +12,6 @@ use Composer\IO\IOInterface;
 use Contributte\Neonizer\Config\FileConfig;
 use Contributte\Neonizer\Decoder\DecoderFactory;
 use Contributte\Neonizer\Encoder\EncoderFactory;
-use Contributte\Neonizer\FileLoader;
 use Contributte\Neonizer\FileProcessor;
 use Mockery;
 use Tester\Assert;
@@ -42,7 +41,7 @@ class FileProcessorTest extends TestCase
 			->shouldReceive('write')
 			->getMock();
 
-		$processor = new FileProcessor($io, new EncoderFactory(), new FileLoader(new DecoderFactory()));
+		$processor = new FileProcessor($io, new EncoderFactory(), new DecoderFactory());
 		$processor->process($config);
 
 		self::assertFiles(__DIR__ . '/files/no-interactive.neon', $generatedFile);
@@ -63,7 +62,7 @@ class FileProcessorTest extends TestCase
 			->getMock()
 			->shouldReceive('write')
 			->getMock();
-		$processor = new FileProcessor($io, new EncoderFactory(), new FileLoader(new DecoderFactory()));
+		$processor = new FileProcessor($io, new EncoderFactory(), new DecoderFactory());
 
 		$generatedFile = __DIR__ . '/../tmp/files/interactive.neon';
 		$processor->process(new FileConfig([

@@ -22,8 +22,7 @@ class NeonizerExtension
 		$extras = $event->getComposer()->getPackage()->getExtra();
 		$fileConfigs = self::extractFileConfigs($event->getIO(), $extras);
 
-		$fileLoader = new FileLoader(new DecoderFactory());
-		$processor = new FileProcessor($event->getIO(), new EncoderFactory(), $fileLoader);
+		$processor = new FileProcessor($event->getIO(), new EncoderFactory(), new DecoderFactory());
 		foreach ($fileConfigs as $fileConfig) {
 			$processor->process($fileConfig);
 		}
@@ -38,8 +37,7 @@ class NeonizerExtension
 		$extras = $event->getComposer()->getPackage()->getExtra();
 		$fileConfigs = self::extractFileConfigs($event->getIO(), $extras);
 
-		$fileLoader = new FileLoader(new DecoderFactory());
-		$validator = new FileValidator($event->getIO(), $fileLoader);
+		$validator = new FileValidator($event->getIO(), new DecoderFactory());
 		foreach ($fileConfigs as $fileConfig) {
 			$missingKeys = $validator->validate($fileConfig);
 			if (!empty($missingKeys)) {
