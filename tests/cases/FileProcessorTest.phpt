@@ -4,6 +4,8 @@ namespace Contributte\Neonizer\Tests;
 
 /**
  * Test: FileProcessor
+ *
+ * @testCase
  */
 
 use Composer\IO\IOInterface;
