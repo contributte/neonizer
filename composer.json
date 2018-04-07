@@ -1,6 +1,6 @@
 {
   "name": "contributte/neonizer",
-  "description": " Interactive fill NEON parameters during composer install / update",
+  "description": "Collection of useful scripts for manipulaton with NEON files. Support composer pre-install / post-install events. Set/get parameters, validate files.",
   "keywords": ["nette", "composer", "parameters", "neon", "interactive"],
   "type": "library",
   "license": ["MIT"],
