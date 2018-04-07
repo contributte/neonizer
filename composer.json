@@ -1,25 +1,25 @@
 {
   "name": "contributte/neonizer",
-  "description": "Neonizer",
-  "keywords": ["nette", "composer"],
+  "description": " Interactive fill NEON parameters during composer install / update",
+  "keywords": ["nette", "composer", "parameters", "neon", "interactive"],
   "type": "library",
   "license": ["MIT"],
   "homepage": "https://github.com/contributte/neonizer",
   "authors": [
     {
-      "name": "Milan Felix Sulc",
+      "name": "Milan Felix Šulc",
       "homepage": "https://f3l1x.io"
     }
   ],
   "require": {
     "php": ">=7.1",
-    "nette/neon": "^2.4.2"
+    "nette/neon": "~2.4.2"
   },
   "require-dev": {
-    "ninjify/qa": "~0.7.1",
-    "ninjify/nunjuck": "~0.2.0",
-    "composer/composer": "^1.5",
-    "mockery/mockery": "^1.0"
+    "ninjify/qa": "^0.7.1",
+    "ninjify/nunjuck": "^0.2.0",
+    "composer/composer": "^1.6.3",
+    "mockery/mockery": "~1.0.0"
   },
   "autoload": {
     "psr-4": {
@@ -39,11 +39,11 @@
     ],
     "phpstan-install": [
       "mkdir -p temp/phpstan",
-      "composer require -d temp/phpstan phpstan/phpstan:0.8.5",
-      "composer require -d temp/phpstan phpstan/phpstan-nette:0.8.3"
+      "composer require -d temp/phpstan phpstan/phpstan:0.9",
+      "composer require -d temp/phpstan phpstan/phpstan-nette:0.9"
     ],
     "phpstan": [
-      "temp/phpstan/vendor/bin/phpstan analyse -l 7 -c phpstan.neon src"
+      "temp/phpstan/vendor/bin/phpstan analyse -l max -c phpstan.neon src"
     ]
   }
 }
