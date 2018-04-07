@@ -15,7 +15,7 @@ class ValidateException extends RuntimeException
 	 */
 	public function __construct(array $missingKeys)
 	{
-		parent::__construct();
+		parent::__construct('', 100);
 		$this->missingKeys = $missingKeys;
 	}
 
