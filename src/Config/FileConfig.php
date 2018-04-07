@@ -2,7 +2,7 @@
 
 namespace Contributte\Neonizer\Config;
 
-use Contributte\Neonizer\Exception\InvalidArgumentException;
+use Contributte\Neonizer\Exception\Logical\InvalidArgumentException;
 use Contributte\Neonizer\Utils;
 
 class FileConfig
@@ -28,14 +28,14 @@ class FileConfig
 		// Dist file
 		if (empty($config['dist-file'])) {
 			throw new InvalidArgumentException(
-				'The dist-file name is required'
+				'The dist-file is required'
 			);
 		}
 		$this->distFile = $config['dist-file'];
 		if (!is_file($this->distFile)) {
 			throw new InvalidArgumentException(
 				sprintf(
-					'The dist file "%s" does not exist. Check your dist-file config or create it.',
+					'The dist file "%s" does not exist. Check your dist-file.',
 					$this->distFile
 				)
 			);

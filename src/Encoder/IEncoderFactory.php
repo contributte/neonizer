@@ -6,9 +6,9 @@ interface IEncoderFactory
 {
 
 	/**
-	 * @param string|NULL $type
+	 * @param string $type
 	 * @return IEncoder
 	 */
-	public function create(?string $type): IEncoder;
+	public function create(string $type): IEncoder;
 
 }

@@ -2,7 +2,7 @@
 
 namespace Contributte\Neonizer\Encoder;
 
-use Contributte\Neonizer\Exception\InvalidArgumentException;
+use Contributte\Neonizer\Exception\Logical\InvalidArgumentException;
 
 class EncoderFactory implements IEncoderFactory
 {
@@ -17,10 +17,10 @@ class EncoderFactory implements IEncoderFactory
 	private $encoders = [];
 
 	/**
-	 * @param string|NULL $type
+	 * @param string $type
 	 * @return IEncoder
 	 */
-	public function create(?string $type): IEncoder
+	public function create(string $type): IEncoder
 	{
 		if (isset($this->encoders[$type])) {
 			return $this->encoders[$type];
@@ -31,7 +31,7 @@ class EncoderFactory implements IEncoderFactory
 			return $this->create($type);
 		}
 
-		throw new InvalidArgumentException('Missing Encoder type ' . (string) $type);
+		throw new InvalidArgumentException('Unknown encoder type ' . (string) $type);
 	}
 
 }

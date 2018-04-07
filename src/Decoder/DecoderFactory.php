@@ -2,7 +2,7 @@
 
 namespace Contributte\Neonizer\Decoder;
 
-use Contributte\Neonizer\Exception\InvalidArgumentException;
+use Contributte\Neonizer\Exception\Logical\InvalidArgumentException;
 
 class DecoderFactory implements IDecoderFactory
 {
@@ -17,10 +17,10 @@ class DecoderFactory implements IDecoderFactory
 	private $decoders = [];
 
 	/**
-	 * @param string|NULL $type
+	 * @param string $type
 	 * @return IDecoder
 	 */
-	public function create(?string $type): IDecoder
+	public function create(string $type): IDecoder
 	{
 		if (isset($this->decoders[$type])) {
 			return $this->decoders[$type];
@@ -31,7 +31,7 @@ class DecoderFactory implements IDecoderFactory
 			return $this->create($type);
 		}
 
-		throw new InvalidArgumentException('Missing Decoder type ' . (string) $type);
+		throw new InvalidArgumentException('Unknown decoder type ' . (string) $type);
 	}
 
 }

@@ -34,6 +34,42 @@ Install via composer
 composer require contributte/neonizer
 ```
 
+
+## Usage
+
+### Processing
+
+Neonizer can load your dist/template file with default parameters and in interactive mode allow you fill config local. 
+As you can see on gif above.
+
+Add `extra.neonizer` section to your composer.json 
+
+```json
+"extra": {
+  "neonizer": {
+    "files": [
+      {
+        "dist-file": "app/config/config.local.neon.dist"
+      },
+      {
+        "dist-file": "app/config/config.local.neon.dist",
+        "file": "app/config/config.server.neon"
+      }
+    ]
+  }
+}
+```
+
+You have to define:
+
+- `dist-file` - Source (template/dist) file for parameters processing.
+
+You optionally can define:
+
+- `file` - Destination (result) file with processed parameters.
+    - By default is result file guest removing trailing file extensions (`.dist, .tpl, .template`).
+    - For example `app/config/config.local.neon.dist` dump `app/config/config.local.neon` file.
+
 Add post-install and post-update script to composer.json
 
 ```json
@@ -47,30 +83,39 @@ Add post-install and post-update script to composer.json
 }
 ```
 
-## Usage
+Try to run `composer install` or `composer update`.
 
-Add `extra.neonizer` section to your composer.json 
+### Validation
+
+Neonizer is also able to validate the configuration non-interactively. Add the following script to composer.json
 
 ```json
 "extra": {
   "neonizer": {
     "files": [
       {
-        "dist-file": "app/config/config.local.neon.dist"
-      },
-      {
         "dist-file": "app/config/config.local.neon.dist",
-        "file": "app/config/config.local.json"
+        "file": "app/config/config.local.neon"
       }
     ]
   }
 }
 ```
 
-You can define:
+Also define composer script in composer.json.
 
-- `dist-file` - Resource/template file for parameters handling.
-- `file` - Destination/result file.
+```json
+"scripts": {
+  "validate-config": [
+    "Contributte\\Neonizer\\NeonizerExtension::validate"
+  ]
+}
+```
+
+Then run `composer run validate-config`. The script will exit with a non-zero code if the destination file forgets
+to set any parameters required by dist-file. This can be run e.g. on production as a part of the deploy process to
+abort the deploy if the configuration is not up-to-date.
+
 
 ## Maintainers
 

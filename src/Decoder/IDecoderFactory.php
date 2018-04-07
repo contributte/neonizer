@@ -6,9 +6,9 @@ interface IDecoderFactory
 {
 
 	/**
-	 * @param string|NULL $type
+	 * @param string $type
 	 * @return IDecoder
 	 */
-	public function create(?string $type): IDecoder;
+	public function create(string $type): IDecoder;
 
 }
