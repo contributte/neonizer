@@ -34,7 +34,7 @@ class TaskValidate
 	public function validate(FileConfig $config): void
 	{
 		if (!$config->isFileExist()) {
-			$this->io->writeError(sprintf('Cannot validate "%s", file does not exist'));
+			$this->io->write(sprintf('Cannot validate "%s", file does not exist'));
 			return;
 		}
 
@@ -49,8 +49,8 @@ class TaskValidate
 		$missingKeys = $this->validateParams($expected, $actual);
 
 		if (!empty($missingKeys)) {
-			$this->io->writeError(sprintf(
-				'The following keys are missing in configuration file "%s": %s',
+			$this->io->write(sprintf(
+				'<error>The following keys are missing in configuration file "%s": %s</error>',
 				$config->getFile(),
 				implode(', ', $missingKeys)
 			));
@@ -59,7 +59,7 @@ class TaskValidate
 			throw new ValidateException($missingKeys);
 		} else {
 			$this->io->write(sprintf(
-				'<success>File "%s" OK.</success>',
+				'<info>File "%s" OK.</info>',
 				$config->getFile()
 			));
 		}

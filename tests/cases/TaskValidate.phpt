@@ -36,9 +36,7 @@ class TaskValidateTest extends TestCase
 		/** @var IOInterface $io */
 		$io = Mockery::mock(IOInterface::class);
 		$io->shouldReceive('write')
-			->once();
-		$io->shouldReceive('writeError')
-			->once();
+			->times(2);
 
 		$validator = new TaskValidate($io);
 
