@@ -4,32 +4,34 @@ namespace Contributte\Neonizer;
 
 use Composer\Script\Event;
 use Contributte\Neonizer\Exception\Logical\InvalidStateException;
+use Contributte\Neonizer\Exception\RuntimeException;
+use Throwable;
 
 class NeonizerExtension
 {
 
-	/**
-	 * @param Event $event
-	 * @return void
-	 */
 	public static function process(Event $event): void
 	{
 		self::ensure($event);
 
-		$tm = new TaskManager();
-		$tm->process($event);
+		try {
+			$tm = new TaskManager();
+			$tm->process($event);
+		} catch (Throwable $e) {
+			self::exception($e);
+		}
 	}
 
-	/**
-	 * @param Event $event
-	 * @return void
-	 */
 	public static function validate(Event $event): void
 	{
 		self::ensure($event);
 
-		$tm = new TaskManager();
-		$tm->validate($event);
+		try {
+			$tm = new TaskManager();
+			$tm->validate($event);
+		} catch (Throwable $e) {
+			self::exception($e);
+		}
 	}
 
 	protected static function ensure(Event $event): void
@@ -51,6 +53,18 @@ class NeonizerExtension
 		if (!is_array($files)) {
 			throw new InvalidStateException('The extra.neonizer.files setting must be an array.');
 		}
+	}
+
+	protected static function exception(Throwable $e): void
+	{
+		// Exit this script with non-zero status
+		// in case of our exception
+		if ($e instanceof RuntimeException) {
+			$code = $e->getCode() > 0 ? $e->getCode() : 99;
+			exit($code);
+		}
+
+		throw $e;
 	}
 
 }
