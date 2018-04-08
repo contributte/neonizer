@@ -16,10 +16,6 @@ class EncoderFactory implements IEncoderFactory
 	/** @var IEncoder[] */
 	private $encoders = [];
 
-	/**
-	 * @param string $type
-	 * @return IEncoder
-	 */
 	public function create(string $type): IEncoder
 	{
 		if (isset($this->encoders[$type])) {

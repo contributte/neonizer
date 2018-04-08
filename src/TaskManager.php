@@ -14,12 +14,12 @@ class TaskManager
 		$extras = $event->getComposer()->getPackage()->getExtra();
 		$files = $extras['neonizer']['files'];
 
-		$processor = new TaskProcess($event->getIO());
+		$task = new TaskProcess($event->getIO());
 		foreach ($files as $config) {
 			if (!is_array($config)) {
 				throw new InvalidStateException('The extra.neonizer.files setting must be an array of configuration objects.');
 			}
-			$processor->process(new FileConfig($config));
+			$task->process(new FileConfig($config));
 		}
 	}
 
@@ -28,13 +28,19 @@ class TaskManager
 		$extras = $event->getComposer()->getPackage()->getExtra();
 		$files = $extras['neonizer']['files'];
 
-		$processor = new TaskValidate($event->getIO());
+		$task = new TaskValidate($event->getIO());
 		foreach ($files as $config) {
 			if (!is_array($config)) {
 				throw new InvalidStateException('The extra.neonizer.files setting must be an array of configuration objects.');
 			}
-			$processor->validate(new FileConfig($config));
+			$task->validate(new FileConfig($config));
 		}
+	}
+
+	public function set(Event $event): void
+	{
+		$task = new TaskSet($event->getIO());
+		$task->set($event->getArguments());
 	}
 
 }

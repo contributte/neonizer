@@ -58,41 +58,26 @@ class FileConfig
 		}
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getFile(): string
 	{
 		return $this->file;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getDistFile(): string
 	{
 		return $this->distFile;
 	}
 
-	/**
-	 * @return string|NULL
-	 */
 	public function getSourceType(): ?string
 	{
 		return $this->sourceType;
 	}
 
-	/**
-	 * @return string|NULL
-	 */
 	public function getOutputType(): ?string
 	{
 		return $this->outputType;
 	}
 
-	/**
-	 * @return bool
-	 */
 	public function isFileExist(): bool
 	{
 		return is_file($this->file);

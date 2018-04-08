@@ -106,9 +106,9 @@ Also define composer script in composer.json.
 
 ```json
 "scripts": {
-  "validate-config": [
-    "Contributte\\Neonizer\\NeonizerExtension::validate"
-  ]
+    "validate-config": [
+      "Contributte\\Neonizer\\NeonizerExtension::validate"
+    ]
 }
 ```
 
@@ -116,6 +116,32 @@ Then run `composer run validate-config`. The script will exit with a non-zero co
 to set any parameters required by dist-file. This can be run e.g. on production as a part of the deploy process to
 abort the deploy if the configuration is not up-to-date.
 
+### Set/Get
+
+This feature is suitable for CI and deployment. You can easily set the configuration into NEON file programmatically.
+
+Add special script into composer.json.
+
+```json
+"scripts": {
+    "set-config": [
+      "Contributte\\Neonizer\\NeonizerExtension::set"
+    ]
+}
+```
+
+Then run:
+
+```sh
+composer set-config -- $(pwd)/app/config/config.local.neon --database.host=localhost --database.user=neonizer
+```
+
+Do you like **environment parameters**? 
+
+
+```sh
+composer set-config -- $(pwd)/app/config/config.local.neon --database.host=$DATABASE_HOST --database.user=$DATABASE_USER
+```
 
 ## Maintainers
 

@@ -17,19 +17,12 @@ class TaskProcess
 	/** @var FileManager */
 	private $fileManager;
 
-	/**
-	 * @param IOInterface $io
-	 */
 	public function __construct(IOInterface $io)
 	{
 		$this->io = $io;
 		$this->fileManager = new FileManager(new EncoderFactory(), new DecoderFactory());
 	}
 
-	/**
-	 * @param FileConfig $config
-	 * @return void
-	 */
 	public function process(FileConfig $config): void
 	{
 		$this->io->write(sprintf(
@@ -78,11 +71,6 @@ class TaskProcess
 		return $actual;
 	}
 
-	/**
-	 * @param string $param
-	 * @param string|NULL $default
-	 * @return string|NULL
-	 */
 	protected function getParam(string $param, ?string $default): ?string
 	{
 		if (!$this->io->isInteractive()) return $default;

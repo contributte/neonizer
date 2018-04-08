@@ -16,10 +16,6 @@ class DecoderFactory implements IDecoderFactory
 	/** @var IDecoder[] */
 	private $decoders = [];
 
-	/**
-	 * @param string $type
-	 * @return IDecoder
-	 */
 	public function create(string $type): IDecoder
 	{
 		if (isset($this->decoders[$type])) {

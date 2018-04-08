@@ -27,10 +27,6 @@ class TaskValidate
 		$this->fileManager = new FileManager(new EncoderFactory(), new DecoderFactory());
 	}
 
-	/**
-	 * @param FileConfig $config
-	 * @return void
-	 */
 	public function validate(FileConfig $config): void
 	{
 		if (!$config->isFileExist()) {

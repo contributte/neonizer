@@ -34,6 +34,16 @@ class NeonizerExtension
 		}
 	}
 
+	public static function set(Event $event): void
+	{
+		try {
+			$tm = new TaskManager();
+			$tm->set($event);
+		} catch (Throwable $e) {
+			self::exception($e);
+		}
+	}
+
 	protected static function ensure(Event $event): void
 	{
 		$extras = $event->getComposer()->getPackage()->getExtra();

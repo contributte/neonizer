@@ -6,6 +6,7 @@ use Contributte\Neonizer\Config\FileConfig;
 use Contributte\Neonizer\Decoder\IDecoderFactory;
 use Contributte\Neonizer\Encoder\IEncoderFactory;
 use Contributte\Neonizer\Exception\Logical\InvalidStateException;
+use Contributte\Neonizer\Utils;
 
 final class FileManager
 {
@@ -73,21 +74,7 @@ final class FileManager
 		$encoder = $this->encoderFactory->create($config->getOutputType());
 		$content = $encoder->encode($content);
 
-		$this->saveFile((string) $content, $config->getFile());
-	}
-
-	/**
-	 * @param string $content
-	 * @param string $filename
-	 * @return void
-	 */
-	public function saveFile(string $content, string $filename): void
-	{
-		$dir = dirname($filename);
-		if (!is_dir($dir)) {
-			mkdir($dir, 0755, TRUE);
-		}
-		file_put_contents($filename, $content);
+		Utils::saveFile($config->getFile(), (string) $content);
 	}
 
 }

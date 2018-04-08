@@ -8,10 +8,6 @@ class Utils
 	/** @var string[] */
 	public static $extensions = ['.dist', '.template', '.tpl'];
 
-	/**
-	 * @param string $fileName
-	 * @return string|NULL
-	 */
 	public static function detectFileType(string $fileName): ?string
 	{
 		$fileName = self::removeDistExtensions($fileName);
@@ -21,10 +17,6 @@ class Utils
 		return end($parts);
 	}
 
-	/**
-	 * @param string $fileName
-	 * @return string
-	 */
 	public static function removeDistExtensions(string $fileName): string
 	{
 		foreach (self::$extensions as $ext) {
@@ -38,14 +30,18 @@ class Utils
 		return $fileName;
 	}
 
-	/**
-	 * @param string $haystack
-	 * @param string $needle
-	 * @return bool
-	 */
 	public static function endsWith(string $haystack, string $needle): bool
 	{
 		return strlen($needle) === 0 || substr($haystack, -strlen($needle)) === $needle;
+	}
+
+	public static function saveFile(string $filename, string $data, int $mode = 0755): void
+	{
+		$dir = dirname($filename);
+		if (!is_dir($dir)) {
+			mkdir($dir, $mode, TRUE);
+		}
+		file_put_contents($filename, $data);
 	}
 
 }
