@@ -116,7 +116,7 @@ Then run `composer run validate-config`. The script will exit with a non-zero co
 to set any parameters required by dist-file. This can be run e.g. on production as a part of the deploy process to
 abort the deploy if the configuration is not up-to-date.
 
-### Set/Get
+### Set variables
 
 This feature is suitable for CI and deployment. You can easily set the configuration into NEON file programmatically.
 
@@ -136,7 +136,7 @@ Then run:
 composer set-config -- $(pwd)/app/config/config.local.neon --database.host=localhost --database.user=neonizer
 ```
 
-Do you like **environment parameters**? 
+Do you like **environment variables**? 
 
 
 ```sh
