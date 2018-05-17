@@ -164,7 +164,7 @@ composer set-config -- $(pwd)/app/config/config.local.neon --database.host=$DATA
         <a href="https://github.com/benijo">Josef Benjač</a>
       </td>
     </tr>
-  <tbody>
+  </tbody>
 </table>
 
 -----
