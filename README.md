@@ -25,7 +25,7 @@ Interactive parameters (NEON/JSON) handling during composer install / update.
 
 ## Sample
 
-![Neonizer](.docs/neonizer.gif)
+![Neonizer](https://raw.githubusercontent.com/contributte/neonizer/master/.docs/neonizer.gif)
 
 ## Install
 
