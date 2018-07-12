@@ -3,3 +3,5 @@ includes:
 	- temp/phpstan/vendor/phpstan/phpstan-nette/rules.neon
 
 parameters:
+    ignoreErrors:
+        - '#Strict comparison using === between string and false will always evaluate to false.#' # phpstan error

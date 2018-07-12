@@ -52,7 +52,7 @@ class TaskSet
 			if (!$matches) throw new InvalidArgumentException(sprintf('Invalid argument "%s" given.', $argument));
 
 			// Dynamically added option for better parsing
-			$definition->addOption(new InputOption($matches[1], NULL, InputOption::VALUE_REQUIRED));
+			$definition->addOption(new InputOption($matches[1], null, InputOption::VALUE_REQUIRED));
 		}
 
 		$input = new StringInput(implode(' ', $args));

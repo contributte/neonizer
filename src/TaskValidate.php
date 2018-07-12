@@ -18,9 +18,6 @@ class TaskValidate
 	/** @var FileManager */
 	private $fileManager;
 
-	/**
-	 * @param IOInterface $io
-	 */
 	public function __construct(IOInterface $io)
 	{
 		$this->io = $io;
@@ -30,7 +27,7 @@ class TaskValidate
 	public function validate(FileConfig $config): void
 	{
 		if (!$config->isFileExist()) {
-			$this->io->write(sprintf('Cannot validate "%s", file does not exist'));
+			$this->io->write(sprintf('Cannot validate "%s", file does not exist', $config->getFile()));
 			return;
 		}
 
@@ -64,14 +61,14 @@ class TaskValidate
 	/**
 	 * @param mixed[] $expected
 	 * @param mixed[] $actual
-	 * @param string|NULL $parentSection
 	 * @return string[]
 	 */
-	protected function validateParams(array $expected, array $actual, ?string $parentSection = NULL): array
+	protected function validateParams(array $expected, array $actual, ?string $parentSection = null): array
 	{
 		$missingKeys = [];
 
 		foreach ($expected as $key => $param) {
+			/** @var string $section */
 			$section = $parentSection ? $parentSection . '.' . $key : $key;
 			if (is_array($param)) {
 				$actualSection = $actual[$key] ?? [];

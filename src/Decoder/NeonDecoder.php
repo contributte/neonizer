@@ -8,7 +8,6 @@ class NeonDecoder implements IDecoder
 {
 
 	/**
-	 * @param string $value
 	 * @return mixed[]
 	 */
 	public function decode(string $value): array

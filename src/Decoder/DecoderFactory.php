@@ -27,7 +27,7 @@ class DecoderFactory implements IDecoderFactory
 			return $this->create($type);
 		}
 
-		throw new InvalidArgumentException('Unknown decoder type ' . (string) $type);
+		throw new InvalidArgumentException('Unknown decoder type ' . $type);
 	}
 
 }

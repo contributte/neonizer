@@ -18,10 +18,6 @@ final class FileLoader
 	/** @var IDecoderFactory */
 	private $decoderFactory;
 
-	/**
-	 * @param IEncoderFactory $encoderFactory
-	 * @param IDecoderFactory $decoderFactory
-	 */
 	public function __construct(
 		IEncoderFactory $encoderFactory,
 		IDecoderFactory $decoderFactory
@@ -49,7 +45,7 @@ final class FileLoader
 	 */
 	public function decodeFile(string $filename, IDecoder $decoder): array
 	{
-		return $decoder->decode(file_get_contents($filename));
+		return $decoder->decode((string) file_get_contents($filename));
 	}
 
 	/**
@@ -71,7 +67,7 @@ final class FileLoader
 	 */
 	public function encodeFile(array $data, IEncoder $decoder): string
 	{
-		return $decoder->encode($data);
+		return (string) $decoder->encode($data);
 	}
 
 }
