@@ -25,9 +25,6 @@ class TaskProcessTest extends TestCase
 		Mockery::close();
 	}
 
-	/**
-	 * @return void
-	 */
 	public function testNoInteractive(): void
 	{
 		$generatedFile = TEMP_DIR . '/no-interactive.neon';
@@ -40,7 +37,7 @@ class TaskProcessTest extends TestCase
 		$io = Mockery::mock(IOInterface::class);
 		$io->shouldReceive('isInteractive')
 			->times(4)
-			->andReturn(FALSE);
+			->andReturn(false);
 		$io->shouldReceive('write')
 			->once();
 
@@ -50,16 +47,13 @@ class TaskProcessTest extends TestCase
 		self::assertFiles(__DIR__ . '/../fixtures/files/no-interactive.neon', $generatedFile);
 	}
 
-	/**
-	 * @return void
-	 */
 	public function testInteractive(): void
 	{
 		/** @var IOInterface $io */
 		$io = Mockery::mock(IOInterface::class);
 		$io->shouldReceive('isInteractive')
 			->times(8)
-			->andReturn(TRUE);
+			->andReturn(true);
 		$io->shouldReceive('ask')
 			->times(8)
 			->andReturn('bar');
@@ -83,11 +77,6 @@ class TaskProcessTest extends TestCase
 		self::assertFiles(__DIR__ . '/../fixtures/files/interactive.json', $generatedFile);
 	}
 
-	/**
-	 * @param string $expected
-	 * @param string $actual
-	 * @return void
-	 */
 	private static function assertFiles(string $expected, string $actual): void
 	{
 		Assert::same(file_get_contents($expected), file_get_contents($actual));

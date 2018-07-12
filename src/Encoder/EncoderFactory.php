@@ -27,7 +27,7 @@ class EncoderFactory implements IEncoderFactory
 			return $this->create($type);
 		}
 
-		throw new InvalidArgumentException('Unknown encoder type ' . (string) $type);
+		throw new InvalidArgumentException('Unknown encoder type ' . $type);
 	}
 
 }

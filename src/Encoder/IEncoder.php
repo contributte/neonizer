@@ -9,7 +9,6 @@ interface IEncoder
 
 	/**
 	 * @param mixed[] $value
-	 * @return string|NULL
 	 */
 	public function encode(array $value): ?string;
 

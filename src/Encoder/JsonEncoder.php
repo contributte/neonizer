@@ -7,11 +7,11 @@ class JsonEncoder implements IEncoder
 
 	/**
 	 * @param mixed[] $value
-	 * @return string|NULL
 	 */
 	public function encode(array $value): ?string
 	{
-		return json_encode($value, JSON_PRETTY_PRINT);
+		$output = json_encode($value, JSON_PRETTY_PRINT);
+		return ($output !== false) ? $output : null;
 	}
 
 }

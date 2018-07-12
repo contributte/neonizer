@@ -46,12 +46,12 @@ class TaskProcess
 	/**
 	 * @param mixed[] $expected
 	 * @param mixed[] $actual
-	 * @param string|NULL $parentSection
 	 * @return mixed[]
 	 */
-	protected function processParams(array $expected, array $actual, ?string $parentSection = NULL): array
+	protected function processParams(array $expected, array $actual, ?string $parentSection = null): array
 	{
 		foreach ($expected as $key => $param) {
+			/** @var string $section */
 			$section = $parentSection ? $parentSection . '.' . $key : $key;
 
 			// If section is array, step into recursion
