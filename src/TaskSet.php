@@ -77,7 +77,28 @@ class TaskSet
 		}
 
 		$content = $this->fileLoader->loadFile($file);
-		$this->fileLoader->saveFile(array_merge($content, $updated), $file);
+
+		$this->fileLoader->saveFile(self::mergeTree($updated, $content), $file);
+	}
+
+	/**
+	 * Nette\Arrays::mergeTree
+	 *
+	 * Recursively appends elements of remaining keys from the second array to the first.
+	 *
+	 * @param mixed[] $arr1
+	 * @param mixed[] $arr2
+	 * @return mixed[]
+	 */
+	public static function mergeTree(array $arr1, array $arr2): array
+	{
+		$res = $arr1 + $arr2;
+		foreach (array_intersect_key($arr1, $arr2) as $k => $v) {
+			if (is_array($v) && is_array($arr2[$k])) {
+				$res[$k] = self::mergeTree($v, $arr2[$k]);
+			}
+		}
+		return $res;
 	}
 
 }
