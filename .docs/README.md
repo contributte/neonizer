@@ -10,8 +10,9 @@
 
 ### Processing
 
-Neonizer can load your dist/template file with default parameters and in interactive mode allow you fill config local.
-As you can see on gif above.
+![Neonizer](/.docs/assets/neonizer.gif?raw=true)
+
+Neonizer allows loading of a dist/template file with default parameters. Those can then be filled in a local config neon file using an interactive mode, as can be seen above in the gif.
 
 Add `extra.neonizer` section to your composer.json
 
@@ -38,8 +39,8 @@ You have to define:
 You optionally can define:
 
 - `file` - Destination (result) file with processed parameters.
-    - By default is result file guest removing trailing file extensions (`.dist, .tpl, .template`).
-    - For example `app/config/config.local.neon.dist` dump `app/config/config.local.neon` file.
+    - By default, the resulting file is created by removing the trailing file extension (`.dist, .tpl, .template`).
+    - For example `app/config/config.local.neon.dist` results to `app/config/config.local.neon`.
 
 Add post-install and post-update script to composer.json
 
@@ -58,7 +59,7 @@ Try to run `composer install` or `composer update`.
 
 ### Validation
 
-Neonizer is also able to validate the configuration non-interactively. Add the following script to composer.json
+Neonizer is also able to validate the configuration non-interactively. Add the following script to `composer.json`.
 
 ```json
 "extra": {
@@ -73,7 +74,7 @@ Neonizer is also able to validate the configuration non-interactively. Add the f
 }
 ```
 
-Also define composer script in composer.json.
+Also define composer script in `composer.json`.
 
 ```json
 "scripts": {
@@ -83,7 +84,7 @@ Also define composer script in composer.json.
 }
 ```
 
-Then run `composer run validate-config`. The script will exit with a non-zero code if the destination file forgets
+Then run `composer run validate-config`. The script will exit with a non-zero code if the destination file fails
 to set any parameters required by dist-file. This can be run e.g. on production as a part of the deploy process to
 abort the deploy if the configuration is not up-to-date.
 
