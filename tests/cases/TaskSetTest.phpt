@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Contributte\Neonizer\Tests;
+namespace Tests\Cases\Contributte\Neonizer;
 
 /**
  * Test: TaskSet

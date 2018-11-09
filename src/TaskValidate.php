@@ -69,7 +69,7 @@ class TaskValidate
 
 		foreach ($expected as $key => $param) {
 			/** @var string $section */
-			$section = $parentSection ? $parentSection . '.' . $key : $key;
+			$section = $parentSection !== null ? $parentSection . '.' . $key : $key;
 			if (is_array($param)) {
 				$actualSection = $actual[$key] ?? [];
 				$missingKeys = array_merge($missingKeys, $this->validateParams($param, $actualSection, $section));
