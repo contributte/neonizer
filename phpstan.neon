@@ -1,7 +1,14 @@
 includes:
+	- temp/phpstan/vendor/phpstan/phpstan-deprecation-rules/rules.neon
 	- temp/phpstan/vendor/phpstan/phpstan-nette/extension.neon
 	- temp/phpstan/vendor/phpstan/phpstan-nette/rules.neon
+	- temp/phpstan/vendor/phpstan/phpstan-strict-rules/rules.neon
 
 parameters:
-    ignoreErrors:
-        - '#Strict comparison using === between string and false will always evaluate to false.#' # phpstan error
+	ignoreErrors:
+		# phpstan error
+		- '#^Strict comparison using === between string and false will always evaluate to false.#'
+
+		# too lazy to solve
+		- '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+		- '#^Only booleans are allowed in a negated boolean.*#'

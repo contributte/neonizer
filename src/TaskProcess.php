@@ -52,7 +52,7 @@ class TaskProcess
 	{
 		foreach ($expected as $key => $param) {
 			/** @var string $section */
-			$section = $parentSection ? $parentSection . '.' . $key : $key;
+			$section = $parentSection !== null ? $parentSection . '.' . $key : $key;
 
 			// If section is array, step into recursion
 			if (is_array($param)) {

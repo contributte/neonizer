@@ -60,6 +60,7 @@ class TaskSet
 		$input->bind($definition);
 
 		// Validate input file
+		/** @var string $file */
 		$file = $input->getArgument('file');
 		if (!file_exists($file)) {
 			$this->io->write(sprintf('<error>Input file "%s" does not exist</error>', $file));
