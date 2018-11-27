@@ -71,12 +71,25 @@ class TaskProcess
 		return $actual;
 	}
 
-	protected function getParam(string $param, ?string $default): ?string
+	/**
+	 * @param mixed $param
+	 * @param mixed $default
+	 * @return mixed
+	 */
+	protected function getParam($param, $default = null)
 	{
+		$displayDefault = $default;
+
+		if (is_bool($default)) {
+			$displayDefault = $default ? 'true' : 'false';
+		} elseif ($default === null) {
+			$displayDefault = 'null';
+		}
+
 		if (!$this->io->isInteractive()) return $default;
 
 		return $this->io->ask(
-			sprintf('<question>%s</question> (<comment>%s</comment>): ', $param, $default),
+			sprintf('<question>%s</question> (<comment>%s</comment>): ', $param, $displayDefault),
 			$default
 		);
 	}
