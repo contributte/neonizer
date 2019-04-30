@@ -81,14 +81,17 @@ class TaskProcess
 		$displayDefault = $default;
 
 		if (is_bool($default)) {
-			$displayDefault = $default ? 'true' : 'false';
+			$displayDefault = $default ? 'yes' : 'no';
 		} elseif ($default === null) {
 			$displayDefault = 'null';
 		}
 
 		if (!$this->io->isInteractive()) return $default;
 
-		return $this->io->ask(
+		return is_bool($default) ? $this->io->askConfirmation(
+			sprintf('<question>%s</question> (<comment>%s</comment>): ', $param, $displayDefault),
+			$default
+		) : $this->io->ask(
 			sprintf('<question>%s</question> (<comment>%s</comment>): ', $param, $displayDefault),
 			$default
 		);
