@@ -12,3 +12,7 @@ parameters:
 		# too lazy to solve
 		- '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 		- '#^Only booleans are allowed in a negated boolean.*#'
+
+		# Should not happen - value is checked in code above
+		- '#^Parameter .+ of function sprintf expects bool\|float\|int\|string\|null, bool\|float\|int\|Nette\\Neon\\Entity\|string\|null given\.$#'
+		- '#^Parameter .+ of method Composer\\IO\\IOInterface\:\:ask\(\) expects string\|null, float\|int\|string\|null given\.$#'

@@ -7,6 +7,7 @@ use Contributte\Neonizer\Config\FileConfig;
 use Contributte\Neonizer\Decoder\DecoderFactory;
 use Contributte\Neonizer\Encoder\EncoderFactory;
 use Contributte\Neonizer\File\FileManager;
+use Nette\Neon\Entity;
 
 class TaskProcess
 {
@@ -73,8 +74,8 @@ class TaskProcess
 
 	/**
 	 * @param mixed $param
-	 * @param mixed $default
-	 * @return mixed
+	 * @param Entity|string|int|float|bool|null $default
+	 * @return Entity|string|int|float|bool|null
 	 */
 	protected function getParam($param, $default = null)
 	{
@@ -86,15 +87,13 @@ class TaskProcess
 			$displayDefault = 'null';
 		}
 
-		if (!$this->io->isInteractive()) return $default;
+		if (!$this->io->isInteractive() || $default instanceof Entity) return $default;
 
-		return is_bool($default) ? $this->io->askConfirmation(
-			sprintf('<question>%s</question> (<comment>%s</comment>): ', $param, $displayDefault),
-			$default
-		) : $this->io->ask(
-			sprintf('<question>%s</question> (<comment>%s</comment>): ', $param, $displayDefault),
-			$default
-		);
+		$question = sprintf('<question>%s</question> (<comment>%s</comment>): ', $param, $displayDefault);
+
+		return is_bool($default)
+			? $this->io->askConfirmation($question, $default)
+			: $this->io->ask($question, $default);
 	}
 
 }
