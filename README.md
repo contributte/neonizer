@@ -1,10 +1,8 @@
-# Neonizer
+# Contributte Neonizer
 
 Interactive parameters (NEON/JSON) handling during composer install / update.
 
-![Neonizer](/.docs/assets/neonizer.gif?raw=true)
-
------
+![Neonizer](/.docs/assets/neonizer.gif)
 
 [![Build Status](https://img.shields.io/travis/contributte/neonizer.svg?style=flat-square)](https://travis-ci.org/contributte/neonizer)
 [![Code coverage](https://img.shields.io/coveralls/contributte/neonizer.svg?style=flat-square)](https://coveralls.io/r/contributte/neonizer)
@@ -12,17 +10,18 @@ Interactive parameters (NEON/JSON) handling during composer install / update.
 [![Downloads this Month](https://img.shields.io/packagist/dm/contributte/neonizer.svg?style=flat-square)](https://packagist.org/packages/contributte/neonizer)
 [![Downloads total](https://img.shields.io/packagist/dt/contributte/neonizer.svg?style=flat-square)](https://packagist.org/packages/contributte/neonizer)
 [![Latest stable](https://img.shields.io/packagist/v/contributte/neonizer.svg?style=flat-square)](https://packagist.org/packages/contributte/neonizer)
-[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat)](https://github.com/phpstan/phpstan)
+[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
 
 ## Discussion / Help
 
 [![Join the chat](https://img.shields.io/gitter/room/contributte/contributte.svg?style=flat-square)](https://gitter.im/contributte/contributte)
 
-## Install
+## Documentation
 
-```sh
-composer require contributte/neonizer
-```
+- [Setup](.docs/README.md#setup)
+- [Processing](.docs/README.md#processing)
+- [Validation](.docs/README.md#validation)
+- [Set variables](.docs/README.md#set-variables)
 
 ## Versions
 
@@ -31,12 +30,6 @@ composer require contributte/neonizer
 | dev         | `^0.3`  | `master` | `>= 7.1` |
 | stable      | `^0.2`  | `master` | `>= 7.1` |
 | stable      | `^0.1`  | `master` | `>= 5.6` |
-
-## Overview
-
-- [Processing](/.docs/README.md#processing)
-- [Validation](/.docs/README.md#validation)
-- [Set variables](/.docs/README.md#set-variables)
 
 ## Maintainers
 
@@ -67,7 +60,5 @@ composer require contributte/neonizer
     </tr>
   </tbody>
 </table>
-
------
 
 Thank you for testing, reporting and contributing.
