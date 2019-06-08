@@ -1,14 +1,19 @@
-# Neonizer
+# Contributte Neonizer
 
 ## Content
 
+- [Setup](#setup)
 - [Processing](#processing)
 - [Validation](#validation)
 - [Set variables](#set-variables)
 
-## Usage
+## Setup
 
-### Processing
+```bash
+composer require contributte/neonizer
+```
+
+## Processing
 
 ![Neonizer](/.docs/assets/neonizer.gif?raw=true)
 
@@ -57,7 +62,7 @@ Add post-install and post-update script to composer.json
 
 Try to run `composer install` or `composer update`.
 
-### Validation
+## Validation
 
 Neonizer is also able to validate the configuration non-interactively. Add the following script to `composer.json`.
 
@@ -88,7 +93,7 @@ Then run `composer run validate-config`. The script will exit with a non-zero co
 to set any parameters required by dist-file. This can be run e.g. on production as a part of the deploy process to
 abort the deploy if the configuration is not up-to-date.
 
-### Set variables
+## Set variables
 
 This feature is suitable for CI and deployment. You can easily set the configuration into NEON file programmatically.
 
