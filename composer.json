@@ -18,8 +18,8 @@
     }
   ],
   "require": {
-    "php": ">=7.1",
-    "nette/neon": "~2.4.2 || ~3.0.0"
+    "php": "^7.2",
+    "nette/neon": "~3.0.0"
   },
   "require-dev": {
     "composer/composer": "^1.6.3",
@@ -44,7 +44,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "0.3.x-dev"
+      "dev-master": "0.4.x-dev"
     }
   }
 }
