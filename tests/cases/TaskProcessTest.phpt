@@ -77,6 +77,24 @@ class TaskProcessTest extends TestCase
 		self::assertFiles(__DIR__ . '/../fixtures/files/interactive.json', $generatedFile);
 	}
 
+	public function testEmptyFile(): void
+	{
+		/** @var IOInterface $io */
+		$io = Mockery::mock(IOInterface::class);
+
+		$io->shouldReceive('write')
+			->times(1);
+
+		$processor = new TaskProcess($io);
+
+		$generatedFile = TEMP_DIR . '/empty.neon';
+		$processor->process(new FileConfig([
+			'dist-file' => __DIR__ . '/../fixtures/files/empty.neon',
+			'file' => $generatedFile,
+		]));
+		self::assertFiles(__DIR__ . '/../fixtures/files/empty.neon', $generatedFile);
+	}
+
 	private static function assertFiles(string $expected, string $actual): void
 	{
 		Assert::same(file_get_contents($expected), file_get_contents($actual));
