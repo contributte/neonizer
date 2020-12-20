@@ -19,6 +19,7 @@ class TaskManager
 			if (!is_array($config)) {
 				throw new InvalidStateException('The extra.neonizer.files setting must be an array of configuration objects.');
 			}
+
 			$task->process(new FileConfig($config));
 		}
 	}
@@ -33,6 +34,7 @@ class TaskManager
 			if (!is_array($config)) {
 				throw new InvalidStateException('The extra.neonizer.files setting must be an array of configuration objects.');
 			}
+
 			$task->validate(new FileConfig($config));
 		}
 	}

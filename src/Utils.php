@@ -38,9 +38,11 @@ class Utils
 	public static function saveFile(string $filename, string $data, int $mode = 0755): void
 	{
 		$dir = dirname($filename);
+
 		if (!is_dir($dir)) {
 			mkdir($dir, $mode, true);
 		}
+
 		file_put_contents($filename, $data);
 	}
 

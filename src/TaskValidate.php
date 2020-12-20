@@ -75,6 +75,7 @@ class TaskValidate
 				$missingKeys = array_merge($missingKeys, $this->validateParams($param, $actualSection, $section));
 				continue;
 			}
+
 			if (!array_key_exists($key, $actual)) {
 				$missingKeys[] = $section;
 			}

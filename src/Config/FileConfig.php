@@ -31,6 +31,7 @@ class FileConfig
 				'The dist-file is required'
 			);
 		}
+
 		$this->distFile = $config['dist-file'];
 		if (!is_file($this->distFile)) {
 			throw new InvalidArgumentException(
@@ -45,6 +46,7 @@ class FileConfig
 		if (!empty($config['file'])) {
 			$this->file = $config['file'];
 		}
+
 		if (!$this->file) {
 			$this->file = Utils::removeDistExtensions($this->distFile);
 		}
@@ -53,6 +55,7 @@ class FileConfig
 		if (!$this->sourceType) {
 			$this->sourceType = Utils::detectFileType($this->distFile);
 		}
+
 		if (!$this->outputType) {
 			$this->outputType = Utils::detectFileType($this->file);
 		}

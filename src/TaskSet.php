@@ -36,6 +36,7 @@ class TaskSet
 			$this->io->write(sprintf('<error>Configuration file is required, e.q. -- $(pwd)/app/config/config.local.neon</error>'));
 			return;
 		}
+
 		if (count($args) < 2) {
 			$this->io->write(sprintf('<error>Add some parameters, e.q. -- $(pwd)/app/config/config.local.neon --database.host=localhost --database.user=neonizer</error>'));
 			return;
@@ -94,11 +95,13 @@ class TaskSet
 	public static function mergeTree(array $arr1, array $arr2): array
 	{
 		$res = $arr1 + $arr2;
+
 		foreach (array_intersect_key($arr1, $arr2) as $k => $v) {
 			if (is_array($v) && is_array($arr2[$k])) {
 				$res[$k] = self::mergeTree($v, $arr2[$k]);
 			}
 		}
+
 		return $res;
 	}
 
