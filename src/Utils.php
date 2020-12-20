@@ -14,8 +14,7 @@ class Utils
 		$parts = explode('.', $fileName);
 		if (count($parts) < 2) return null;
 
-		$end = end($parts);
-		return $end !== false ? $end : null;
+		return end($parts);
 	}
 
 	public static function removeDistExtensions(string $fileName): string
