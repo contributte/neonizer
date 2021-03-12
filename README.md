@@ -26,7 +26,7 @@ Website ðŸš€ <a href="https://contributte.org">contributte.org</a> | Contact ðŸ‘
 
 To install latest version of `contributte/neonizer` use [Composer](https://getcomposer.com).
 
-```
+```bash
 composer require contributte/neonizer
 ```
 
@@ -51,5 +51,5 @@ See [how to contribute](https://contributte.org) to this package. This package i
 
 -----
 
-Consider to [support](https://contributte.com/partners) **contributte** development team.
+Consider to [support](https://contributte.org/partners) **contributte** development team.
 Also thank you for using this package.

@@ -109,13 +109,13 @@ Add special script into composer.json.
 
 Then run:
 
-```sh
+```bash
 composer set-config -- $(pwd)/app/config/config.local.neon --database.host=localhost --database.user=neonizer
 ```
 
 Do you like **environment variables**?
 
 
-```sh
+```bash
 composer set-config -- $(pwd)/app/config/config.local.neon --database.host=$DATABASE_HOST --database.user=$DATABASE_USER
 ```
