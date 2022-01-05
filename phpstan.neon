@@ -8,6 +8,7 @@ parameters:
 	ignoreErrors:
 		# phpstan error
 		- '#^Strict comparison using === between string and false will always evaluate to false.#'
+		- '#^Binary operation "." between non-empty-string and array\|bool\|float\|int\|string\|null results in an error#'
 
 		# too lazy to solve
 		- '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
