@@ -72,8 +72,6 @@ class TaskSet
 		foreach ($input->getOptions() as $key => $value) {
 			// Black magic. It parse --database.host=localhost into $tmp array.
 			// Easy to use! :-)
-			/** @var string $value */
-			$value = $value;
 			parse_str('parameters[' . str_replace('.', '][', $key) . ']=' . $value, $tmp);
 
 			// Merge user inputs

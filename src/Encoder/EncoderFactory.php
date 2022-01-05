@@ -7,7 +7,7 @@ use Contributte\Neonizer\Exception\Logical\InvalidArgumentException;
 class EncoderFactory implements IEncoderFactory
 {
 
-	/** @var string[] */
+	/** @var array<string, class-string<IEncoder>> **/
 	private $encodersMap = [
 		'json' => JsonEncoder::class,
 		'neon' => NeonEncoder::class,
