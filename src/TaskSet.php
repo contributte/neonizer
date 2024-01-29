@@ -78,6 +78,8 @@ class TaskSet
 			$updated = array_merge_recursive($updated, $tmp);
 		}
 
+		$updated = self::normalizeBooleans($updated);
+
 		$content = $this->fileLoader->loadFile($file);
 
 		$this->fileLoader->saveFile(self::mergeTree($updated, $content), $file);
@@ -103,6 +105,26 @@ class TaskSet
 		}
 
 		return $res;
+	}
+
+	/**
+	 * @param array<mixed> $array
+	 * @return array<mixed>
+	 */
+	private static function normalizeBooleans(array $array) {
+		foreach ($array as &$value) {
+			if (is_array($value)) {
+				$value = self::normalizeBooleans($value);
+			} else {
+				if (strtolower($value) === 'true') {
+					$value = true;
+				}
+				if (strtolower($value) === 'false') {
+					$value = false;
+				}
+			}
+		}
+		return $array;
 	}
 
 }
