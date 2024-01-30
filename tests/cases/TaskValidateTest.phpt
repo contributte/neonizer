@@ -44,7 +44,7 @@ class TaskValidateTest extends TestCase
 			$validator->validate($config);
 		}, ValidateException::class);
 
-		Assert::same(['debug', 'database.user', 'database.pass'], $e->missingKeys);
+		Assert::same(['mode', 'database.user', 'database.pass'], $e->missingKeys);
 	}
 
 }
