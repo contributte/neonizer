@@ -33,7 +33,7 @@ class TaskProcessTest extends TestCase
 			'file' => $generatedFile,
 		]);
 
-		/** @var IOInterface $io */
+		/** @var @IOInterface $io */
 		$io = Mockery::mock(IOInterface::class);
 		$io->shouldReceive('isInteractive')
 			->times(4)

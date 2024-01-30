@@ -1,8 +1,8 @@
 {
-    "mode": "bar",
+    "debug": true,
     "database": {
-        "user": "bar",
-        "pass": "bar",
-        "dbname": "bar"
+        "user": "user",
+        "pass": "pass",
+        "dbname": "dbname"
     }
 }

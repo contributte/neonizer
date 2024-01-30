@@ -1,4 +1,4 @@
-mode: debug
+debug: true
 database:
 	user: root
 	pass:
