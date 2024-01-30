@@ -49,16 +49,25 @@ class TaskProcessTest extends TestCase
 
 	public function testInteractive(): void
 	{
-		/** @var IOInterface $io */
+		/** var IOInterface $io */
 		$io = Mockery::mock(IOInterface::class);
 		$io->shouldReceive('isInteractive')
-			->times(8)
+			->times(4)
+			->andReturn(true);
+		$io->shouldReceive('askConfirmation')
+			->once()
 			->andReturn(true);
 		$io->shouldReceive('ask')
-			->times(8)
-			->andReturn('bar');
+			->once()
+			->andReturn('user');
+		$io->shouldReceive('ask')
+			->once()
+			->andReturn('pass');
+		$io->shouldReceive('ask')
+			->once()
+			->andReturn('dbname');
 		$io->shouldReceive('write')
-			->times(2);
+			->once();
 
 		$processor = new TaskProcess($io);
 
@@ -79,7 +88,7 @@ class TaskProcessTest extends TestCase
 
 	public function testEmptyFile(): void
 	{
-		/** @var IOInterface $io */
+		/** var IOInterface $io */
 		$io = Mockery::mock(IOInterface::class);
 
 		$io->shouldReceive('write')
