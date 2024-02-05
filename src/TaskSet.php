@@ -70,7 +70,9 @@ class TaskSet
 
 		$updated = [];
 		foreach ($input->getOptions() as $key => $value) {
-			// Black magic. It parse --database.host=localhost into $tmp array.
+			assert(is_string($value));
+
+			// Black magic. It parses --database.host=localhost into $tmp array.
 			// Easy to use! :-)
 			parse_str('parameters[' . str_replace('.', '][', $key) . ']=' . $value, $tmp);
 
@@ -78,9 +80,12 @@ class TaskSet
 			$updated = array_merge_recursive($updated, $tmp);
 		}
 
+		// Normalize values (booleans, etc)
+		$normalized = self::normalize($updated);
+
 		$content = $this->fileLoader->loadFile($file);
 
-		$this->fileLoader->saveFile(self::mergeTree($updated, $content), $file);
+		$this->fileLoader->saveFile(self::mergeTree($normalized, $content), $file);
 	}
 
 	/**
@@ -103,6 +108,25 @@ class TaskSet
 		}
 
 		return $res;
+	}
+
+	/**
+	 * @param array<mixed> $array
+	 * @return array<mixed>
+	 */
+	private static function normalize(array $array) {
+		foreach ($array as &$value) {
+			if (is_array($value)) {
+				$value = self::normalize($value);
+			} else {
+				if (strtolower($value) === 'true') {
+					$value = true;
+				} else if (strtolower($value) === 'false') {
+					$value = false;
+				}
+			}
+		}
+		return $array;
 	}
 
 }
