@@ -19,7 +19,7 @@
   ],
   "require": {
     "php": ">=8.1",
-    "nette/neon": "^3.0.0"
+    "nette/neon": "^3.4.1"
   },
   "require-dev": {
     "composer/composer": "^1.6.3|^2.0",
