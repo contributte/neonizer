@@ -22,7 +22,7 @@
     "nette/neon": "^3.4.1"
   },
   "require-dev": {
-    "composer/composer": "^1.6.3|^2.0",
+    "composer/composer": "^2.6.6",
     "mockery/mockery": "^1.5.1",
     "contributte/qa": "^0.4",
     "contributte/tester": "^0.3",
