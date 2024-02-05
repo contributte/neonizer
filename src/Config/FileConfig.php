@@ -8,25 +8,23 @@ use Contributte\Neonizer\Utils;
 class FileConfig
 {
 
-	/** @var string */
-	private $file;
+	private string $file;
 
-	/** @var string */
-	private $distFile;
+	private string $distFile;
 
 	/** @var string|NULL */
-	private $sourceType;
+	private ?string $sourceType = null;
 
 	/** @var string|NULL */
-	private $outputType;
+	private ?string $outputType = null;
 
 	/**
-	 * @param mixed[] $config
+	 * @param array{dist-file?: string, file?: string} $config
 	 */
 	public function __construct(array $config)
 	{
 		// Dist file
-		if (empty($config['dist-file'])) {
+		if (!isset($config['dist-file'])) {
 			throw new InvalidArgumentException(
 				'The dist-file is required'
 			);
@@ -43,20 +41,20 @@ class FileConfig
 		}
 
 		// File
-		if (!empty($config['file'])) {
+		if (isset($config['file'])) {
 			$this->file = $config['file'];
 		}
 
-		if (!$this->file) {
+		if (!isset($this->file)) {
 			$this->file = Utils::removeDistExtensions($this->distFile);
 		}
 
 		// Source & output type
-		if (!$this->sourceType) {
+		if ($this->sourceType === null) {
 			$this->sourceType = Utils::detectFileType($this->distFile);
 		}
 
-		if (!$this->outputType) {
+		if ($this->outputType === null) {
 			$this->outputType = Utils::detectFileType($this->file);
 		}
 	}

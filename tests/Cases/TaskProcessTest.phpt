@@ -1,16 +1,11 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\Cases\Contributte\Neonizer;
-
-/**
- * Test: TaskProcess
- *
- * @testCase
- */
+namespace Tests\Cases;
 
 use Composer\IO\IOInterface;
 use Contributte\Neonizer\Config\FileConfig;
 use Contributte\Neonizer\TaskProcess;
+use Contributte\Tester\Environment;
 use Mockery;
 use Tester\Assert;
 use Tester\TestCase;
@@ -20,20 +15,14 @@ require_once __DIR__ . '/../bootstrap.php';
 class TaskProcessTest extends TestCase
 {
 
-	protected function tearDown(): void
-	{
-		Mockery::close();
-	}
-
 	public function testNoInteractive(): void
 	{
-		$generatedFile = TEMP_DIR . '/no-interactive.neon';
+		$generatedFile = Environment::getTestDir() . '/no-interactive.neon';
 		$config = new FileConfig([
-			'dist-file' => __DIR__ . '/../fixtures/files/config.neon.dist',
+			'dist-file' => __DIR__ . '/../Fixtures/files/config.neon.dist',
 			'file' => $generatedFile,
 		]);
 
-		/** @var IOInterface $io */
 		$io = Mockery::mock(IOInterface::class);
 		$io->shouldReceive('isInteractive')
 			->times(4)
@@ -44,12 +33,11 @@ class TaskProcessTest extends TestCase
 		$processor = new TaskProcess($io);
 		$processor->process($config);
 
-		self::assertFiles(__DIR__ . '/../fixtures/files/no-interactive.neon', $generatedFile);
+		self::assertFiles(__DIR__ . '/../Fixtures/files/no-interactive.neon', $generatedFile);
 	}
 
 	public function testInteractive(): void
 	{
-		/** @var IOInterface $io */
 		$io = Mockery::mock(IOInterface::class);
 		$io->shouldReceive('isInteractive')
 			->times(8)
@@ -62,37 +50,35 @@ class TaskProcessTest extends TestCase
 
 		$processor = new TaskProcess($io);
 
-		$generatedFile = TEMP_DIR . '/interactive.neon';
+		$generatedFile = Environment::getTestDir() . '/interactive.neon';
 		$processor->process(new FileConfig([
-			'dist-file' => __DIR__ . '/../fixtures/files/config.neon.dist',
+			'dist-file' => __DIR__ . '/../Fixtures/files/config.neon.dist',
 			'file' => $generatedFile,
 		]));
-		self::assertFiles(__DIR__ . '/../fixtures/files/interactive.neon', $generatedFile);
+		self::assertFiles(__DIR__ . '/../Fixtures/files/interactive.neon', $generatedFile);
 
-		$generatedFile = TEMP_DIR . '/interactive.json';
+		$generatedFile = Environment::getTestDir() . '/interactive.json';
 		$processor->process(new FileConfig([
-			'dist-file' => __DIR__ . '/../fixtures/files/config.neon.dist',
+			'dist-file' => __DIR__ . '/../Fixtures/files/config.neon.dist',
 			'file' => $generatedFile,
 		]));
-		self::assertFiles(__DIR__ . '/../fixtures/files/interactive.json', $generatedFile);
+		self::assertFiles(__DIR__ . '/../Fixtures/files/interactive.json', $generatedFile);
 	}
 
 	public function testEmptyFile(): void
 	{
-		/** @var IOInterface $io */
 		$io = Mockery::mock(IOInterface::class);
-
 		$io->shouldReceive('write')
 			->times(1);
 
 		$processor = new TaskProcess($io);
 
-		$generatedFile = TEMP_DIR . '/empty.neon';
+		$generatedFile = Environment::getTestDir() . '/empty.neon';
 		$processor->process(new FileConfig([
-			'dist-file' => __DIR__ . '/../fixtures/files/empty.neon',
+			'dist-file' => __DIR__ . '/../Fixtures/files/empty.neon',
 			'file' => $generatedFile,
 		]));
-		self::assertFiles(__DIR__ . '/../fixtures/files/empty.neon', $generatedFile);
+		self::assertFiles(__DIR__ . '/../Fixtures/files/empty.neon', $generatedFile);
 	}
 
 	private static function assertFiles(string $expected, string $actual): void

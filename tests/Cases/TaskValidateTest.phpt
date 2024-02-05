@@ -1,12 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\Cases\Contributte\Neonizer;
-
-/**
- * Test: TaskValidate
- *
- * @testCase
- */
+namespace Tests\Cases;
 
 use Composer\IO\IOInterface;
 use Contributte\Neonizer\Config\FileConfig;
@@ -21,19 +15,13 @@ require_once __DIR__ . '/../bootstrap.php';
 class TaskValidateTest extends TestCase
 {
 
-	protected function tearDown(): void
-	{
-		Mockery::close();
-	}
-
 	public function testValidator(): void
 	{
 		$config = new FileConfig([
-			'dist-file' => __DIR__ . '/../fixtures/files/config.neon.dist',
-			'file' => __DIR__ . '/../fixtures/files/invalid.neon',
+			'dist-file' => __DIR__ . '/../Fixtures/files/config.neon.dist',
+			'file' => __DIR__ . '/../Fixtures/files/invalid.neon',
 		]);
 
-		/** @var IOInterface $io */
 		$io = Mockery::mock(IOInterface::class);
 		$io->shouldReceive('write')
 			->times(2);

@@ -10,7 +10,7 @@ class JsonDecoder implements IDecoder
 	 */
 	public function decode(string $value): array
 	{
-		return json_decode($value, true);
+		return (array) json_decode($value, true);
 	}
 
 }

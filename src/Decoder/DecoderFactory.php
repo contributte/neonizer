@@ -8,13 +8,13 @@ class DecoderFactory implements IDecoderFactory
 {
 
 	/** @var array<string, class-string<IDecoder>> **/
-	private $decodersMap = [
+	private array $decodersMap = [
 		'json' => JsonDecoder::class,
 		'neon' => NeonDecoder::class,
 	];
 
 	/** @var IDecoder[] */
-	private $decoders = [];
+	private array $decoders = [];
 
 	public function create(string $type): IDecoder
 	{
@@ -24,6 +24,7 @@ class DecoderFactory implements IDecoderFactory
 
 		if (isset($this->decodersMap[$type])) {
 			$this->decoders[$type] = new $this->decodersMap[$type]();
+
 			return $this->create($type);
 		}
 

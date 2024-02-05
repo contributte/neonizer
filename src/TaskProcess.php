@@ -12,11 +12,9 @@ use Nette\Neon\Entity;
 class TaskProcess
 {
 
-	/** @var IOInterface */
-	private $io;
+	private IOInterface $io;
 
-	/** @var FileManager */
-	private $fileManager;
+	private FileManager $fileManager;
 
 	public function __construct(IOInterface $io)
 	{
@@ -45,8 +43,8 @@ class TaskProcess
 	}
 
 	/**
-	 * @param mixed[] $expected
-	 * @param mixed[] $actual
+	 * @param array<mixed> $expected
+	 * @param array<mixed> $actual
 	 * @return mixed[]
 	 */
 	protected function processParams(array $expected, array $actual, ?string $parentSection = null): array
@@ -58,12 +56,16 @@ class TaskProcess
 			// If section is array, step into recursion
 			if (is_array($param)) {
 				$actualSection = $actual[$key] ?? [];
+				assert(is_array($actualSection));
 				$actual[$key] = $this->processParams($param, $actualSection, $section);
+
 				continue;
 			}
 
 			// If key exist in current file, skip it
-			if (array_key_exists($key, $actual)) continue;
+			if (array_key_exists($key, $actual)) {
+				continue;
+			}
 
 			// Ask for value
 			$actual[$key] = $this->getParam($section, $param);
@@ -72,12 +74,7 @@ class TaskProcess
 		return $actual;
 	}
 
-	/**
-	 * @param mixed $param
-	 * @param Entity|string|int|float|bool|null $default
-	 * @return Entity|string|int|float|bool|null
-	 */
-	protected function getParam($param, $default = null)
+	protected function getParam(string $param, mixed $default = null): mixed
 	{
 		$displayDefault = $default;
 
@@ -87,7 +84,12 @@ class TaskProcess
 			$displayDefault = 'null';
 		}
 
-		if (!$this->io->isInteractive() || $default instanceof Entity) return $default;
+		if (!$this->io->isInteractive() || $default instanceof Entity) {
+			return $default;
+		}
+
+		assert(is_scalar($default) || $default === null);
+		assert(is_scalar($displayDefault));
 
 		$question = sprintf('<question>%s</question> (<comment>%s</comment>): ', $param, $displayDefault);
 

@@ -46,15 +46,18 @@ class NeonizerExtension
 
 	protected static function ensure(Event $event): void
 	{
+		/** @var array{neonizer?: array{files?: mixed}} $extras */
 		$extras = $event->getComposer()->getPackage()->getExtra();
 
 		if (!isset($extras['neonizer'])) {
 			$event->getIO()->write('Missing section extra.neonizer in composer file.');
+
 			return;
 		}
 
 		if (!isset($extras['neonizer']['files'])) {
 			$event->getIO()->write('Missing files attribute in extra.neonizerin in composer file.');
+
 			return;
 		}
 

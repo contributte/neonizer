@@ -12,7 +12,7 @@ class NeonEncoder implements IEncoder
 	 */
 	public function encode(array $value): ?string
 	{
-		return '# ' . IEncoder::GENERATED_MESSAGE . "\n" . ($value !== [] ? Neon::encode($value, Neon::BLOCK) : '');
+		return '# ' . IEncoder::GENERATED_MESSAGE . "\n" . ($value !== [] ? Neon::encode($value, true) : '');
 	}
 
 }

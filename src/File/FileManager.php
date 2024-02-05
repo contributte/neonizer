@@ -11,11 +11,9 @@ use Contributte\Neonizer\Utils;
 final class FileManager
 {
 
-	/** @var IEncoderFactory */
-	private $encoderFactory;
+	private IEncoderFactory $encoderFactory;
 
-	/** @var IDecoderFactory */
-	private $decoderFactory;
+	private IDecoderFactory $decoderFactory;
 
 	public function __construct(
 		IEncoderFactory $encoderFactory,
@@ -31,7 +29,7 @@ final class FileManager
 	 */
 	public function loadFile(FileConfig $config): array
 	{
-		if (empty($config->getOutputType())) {
+		if ($config->getOutputType() === null) {
 			throw new InvalidStateException('Invalid file output type');
 		}
 
@@ -45,7 +43,7 @@ final class FileManager
 	 */
 	public function loadDistFile(FileConfig $config): array
 	{
-		if (empty($config->getSourceType())) {
+		if ($config->getSourceType() === null) {
 			throw new InvalidStateException('Invalid file source type');
 		}
 
@@ -59,7 +57,7 @@ final class FileManager
 	 */
 	public function processFile(array $content, FileConfig $config): void
 	{
-		if (empty($config->getOutputType())) {
+		if ($config->getOutputType() === null) {
 			throw new InvalidStateException('Invalid file output type');
 		}
 

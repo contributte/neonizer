@@ -12,7 +12,7 @@ class NeonDecoder implements IDecoder
 	 */
 	public function decode(string $value): array
 	{
-		return Neon::decode($value) ?? [];
+		return (array) Neon::decode($value);
 	}
 
 }

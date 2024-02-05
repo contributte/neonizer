@@ -11,6 +11,7 @@ class TaskManager
 
 	public function process(Event $event): void
 	{
+		/** @var array{neonizer: array{files: mixed[]}} $extras */
 		$extras = $event->getComposer()->getPackage()->getExtra();
 		$files = $extras['neonizer']['files'];
 
@@ -26,6 +27,7 @@ class TaskManager
 
 	public function validate(Event $event): void
 	{
+		/** @var array{neonizer: array{files: mixed[]}} $extras */
 		$extras = $event->getComposer()->getPackage()->getExtra();
 		$files = $extras['neonizer']['files'];
 

@@ -6,13 +6,15 @@ class Utils
 {
 
 	/** @var string[] */
-	public static $extensions = ['.dist', '.template', '.tpl'];
+	public static array $extensions = ['.dist', '.template', '.tpl'];
 
 	public static function detectFileType(string $fileName): ?string
 	{
 		$fileName = self::removeDistExtensions($fileName);
 		$parts = explode('.', $fileName);
-		if (count($parts) < 2) return null;
+		if (count($parts) < 2)
+
+		return null;
 
 		return end($parts);
 	}
@@ -22,7 +24,10 @@ class Utils
 		foreach (self::$extensions as $ext) {
 			if (self::endsWith($fileName, $ext)) {
 				$name = substr($fileName, 0, -strlen($ext));
-				if ($name === false) continue;
+				if ($name === '') {
+					continue;
+				}
+
 				$fileName = $name;
 			}
 		}

@@ -8,7 +8,7 @@ class ValidateException extends RuntimeException
 {
 
 	/** @var string[] */
-	public $missingKeys;
+	public array $missingKeys;
 
 	/**
 	 * @param string[] $missingKeys
@@ -16,6 +16,7 @@ class ValidateException extends RuntimeException
 	public function __construct(array $missingKeys)
 	{
 		parent::__construct('', 100);
+
 		$this->missingKeys = $missingKeys;
 	}
 

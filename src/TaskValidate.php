@@ -12,11 +12,9 @@ use Contributte\Neonizer\File\FileManager;
 class TaskValidate
 {
 
-	/** @var IOInterface */
-	private $io;
+	private IOInterface $io;
 
-	/** @var FileManager */
-	private $fileManager;
+	private FileManager $fileManager;
 
 	public function __construct(IOInterface $io)
 	{
@@ -28,6 +26,7 @@ class TaskValidate
 	{
 		if (!$config->isFileExist()) {
 			$this->io->write(sprintf('Cannot validate "%s", file does not exist', $config->getFile()));
+
 			return;
 		}
 
@@ -41,7 +40,7 @@ class TaskValidate
 
 		$missingKeys = $this->validateParams($expected, $actual);
 
-		if (!empty($missingKeys)) {
+		if ($missingKeys !== []) {
 			$this->io->write(sprintf(
 				'<error>The following keys are missing in configuration file "%s": %s</error>',
 				$config->getFile(),
@@ -59,8 +58,8 @@ class TaskValidate
 	}
 
 	/**
-	 * @param mixed[] $expected
-	 * @param mixed[] $actual
+	 * @param array<mixed> $expected
+	 * @param array<mixed> $actual
 	 * @return string[]
 	 */
 	protected function validateParams(array $expected, array $actual, ?string $parentSection = null): array
@@ -72,7 +71,9 @@ class TaskValidate
 			$section = $parentSection !== null ? $parentSection . '.' . $key : $key;
 			if (is_array($param)) {
 				$actualSection = $actual[$key] ?? [];
+				assert(is_array($actualSection));
 				$missingKeys = array_merge($missingKeys, $this->validateParams($param, $actualSection, $section));
+
 				continue;
 			}
 

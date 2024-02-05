@@ -12,11 +12,9 @@ use Contributte\Neonizer\Utils;
 final class FileLoader
 {
 
-	/** @var IEncoderFactory */
-	private $encoderFactory;
+	private IEncoderFactory $encoderFactory;
 
-	/** @var IDecoderFactory */
-	private $decoderFactory;
+	private IDecoderFactory $decoderFactory;
 
 	public function __construct(
 		IEncoderFactory $encoderFactory,
@@ -33,7 +31,7 @@ final class FileLoader
 	public function loadFile(string $filename): array
 	{
 		$type = Utils::detectFileType($filename);
-		if (!$type) {
+		if ($type === null) {
 			throw new InvalidStateException('Unsupported file type');
 		}
 
@@ -54,7 +52,7 @@ final class FileLoader
 	public function saveFile(array $data, string $filename): void
 	{
 		$type = Utils::detectFileType($filename);
-		if (!$type) {
+		if ($type === null) {
 			throw new InvalidStateException('Unsupported file type');
 		}
 
