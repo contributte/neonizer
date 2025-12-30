@@ -114,8 +114,8 @@ class TaskSet
 	}
 
 	/**
-	 * @param array<string|string[]> $array
-	 * @return array<string|string[]>
+	 * @param array<mixed> $array
+	 * @return array<mixed>
 	 */
 	private static function normalize(array $array): array
 	{
@@ -123,7 +123,7 @@ class TaskSet
 		foreach ($array as &$value) {
 			if (is_array($value)) {
 				$value = self::normalize($value);
-			} else {
+			} elseif (is_string($value)) {
 				if (strtolower($value) === 'true') {
 					$value = true;
 				} elseif (strtolower($value) === 'false') {

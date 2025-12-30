@@ -4,7 +4,6 @@ namespace Contributte\Neonizer;
 
 use Composer\Script\Event;
 use Contributte\Neonizer\Config\FileConfig;
-use Contributte\Neonizer\Exception\Logical\InvalidStateException;
 
 class TaskManager
 {
@@ -13,14 +12,11 @@ class TaskManager
 	{
 		/** @var array{neonizer: array{files: mixed[]}} $extras */
 		$extras = $event->getComposer()->getPackage()->getExtra();
+		/** @var array<array{dist-file?: string, file?: string}> $files */
 		$files = $extras['neonizer']['files'];
 
 		$task = new TaskProcess($event->getIO());
 		foreach ($files as $config) {
-			if (!is_array($config)) {
-				throw new InvalidStateException('The extra.neonizer.files setting must be an array of configuration objects.');
-			}
-
 			$task->process(new FileConfig($config));
 		}
 	}
@@ -29,14 +25,11 @@ class TaskManager
 	{
 		/** @var array{neonizer: array{files: mixed[]}} $extras */
 		$extras = $event->getComposer()->getPackage()->getExtra();
+		/** @var array<array{dist-file?: string, file?: string}> $files */
 		$files = $extras['neonizer']['files'];
 
 		$task = new TaskValidate($event->getIO());
 		foreach ($files as $config) {
-			if (!is_array($config)) {
-				throw new InvalidStateException('The extra.neonizer.files setting must be an array of configuration objects.');
-			}
-
 			$task->validate(new FileConfig($config));
 		}
 	}
