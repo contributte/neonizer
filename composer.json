@@ -23,10 +23,10 @@
   },
   "require-dev": {
     "composer/composer": "^2.6.6",
-    "mockery/mockery": "^1.5.1",
-    "contributte/qa": "^0.4",
-    "contributte/tester": "^0.3",
-    "contributte/phpstan": "^0.1"
+    "contributte/phpstan": "^0.2.0",
+    "contributte/qa": "^0.4.0",
+    "contributte/tester": "^0.3.0",
+    "mockery/mockery": "^1.6.12"
   },
   "autoload": {
     "psr-4": {
