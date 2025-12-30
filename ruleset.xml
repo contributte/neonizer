@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="Contributte" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
 	<!-- Rulesets -->
-	<rule ref="./vendor/contributte/qa/ruleset-8.0.xml"/>
+	<rule ref="./vendor/contributte/qa/ruleset-8.2.xml"/>
 
 	<!-- Rules -->
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
@@ -11,8 +11,8 @@
 				<element key="tests" value="Tests"/>
 			</property>
 			<property name="extensions" type="array">
-				<element key="php" value="php"/>
-				<element key="phpt" value="phpt"/>
+				<element value="php"/>
+				<element value="phpt"/>
 			</property>
 		</properties>
 	</rule>
